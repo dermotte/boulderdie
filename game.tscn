@@ -1,0 +1,128 @@
+[gd_scene load_steps=13 format=3 uid="uid://5pvuy3bjoiw8"]
+
+[ext_resource type="Script" path="res://Die.gd" id="1_uplf0"]
+[ext_resource type="PackedScene" uid="uid://hhpetkchi738" path="res://BoulderDie01.glb" id="2_nevky"]
+[ext_resource type="PackedScene" uid="uid://cb3cv0fnqwjuy" path="res://BoulderDie02.glb" id="3_d32yr"]
+[ext_resource type="Script" path="res://Camera.gd" id="4_b53ka"]
+[ext_resource type="FontFile" uid="uid://bf23krsf6ndhs" path="res://fonts/NotoSans-Regular.ttf" id="5_ia1ou"]
+[ext_resource type="FontFile" uid="uid://drgena3js6o4a" path="res://fonts/NotoSans-Bold.ttf" id="6_nu3lo"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_chh8g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1sbs"]
+albedo_color = Color(0.129412, 0.329412, 0.0431373, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tsj1o"]
+material = SubResource("StandardMaterial3D_h1sbs")
+size = Vector2(32, 32)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y828a"]
+bounce = 0.2
+absorbent = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_464bg"]
+
+[sub_resource type="Theme" id="Theme_0is81"]
+default_font = ExtResource("5_ia1ou")
+default_font_size = 32
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_chh8g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/CollisionShape3D"]
+mesh = SubResource("PlaneMesh_tsj1o")
+
+[node name="Wall" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 8, 5, 0)
+shape = SubResource("WorldBoundaryShape3D_chh8g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall/CollisionShape3D"]
+visible = false
+mesh = SubResource("PlaneMesh_tsj1o")
+
+[node name="Wall2" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2"]
+transform = Transform3D(4.37114e-08, 1, -8.74228e-08, 1, -4.37114e-08, 0, -3.82137e-15, -8.74228e-08, -1, -8, 5, 0)
+shape = SubResource("WorldBoundaryShape3D_chh8g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall2/CollisionShape3D"]
+visible = false
+mesh = SubResource("PlaneMesh_tsj1o")
+
+[node name="Wall3" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0, 5, 5)
+shape = SubResource("WorldBoundaryShape3D_chh8g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall3/CollisionShape3D"]
+visible = false
+mesh = SubResource("PlaneMesh_tsj1o")
+
+[node name="Wall4" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall4"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 5, -5)
+shape = SubResource("WorldBoundaryShape3D_chh8g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall4/CollisionShape3D"]
+visible = false
+mesh = SubResource("PlaneMesh_tsj1o")
+
+[node name="Die" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_y828a")
+script = ExtResource("1_uplf0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Die"]
+shape = SubResource("BoxShape3D_464bg")
+
+[node name="BoulderDie01" parent="Die/CollisionShape3D" instance=ExtResource("2_nevky")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.5, 0)
+visible = false
+
+[node name="BoulderDie02" parent="Die/CollisionShape3D" instance=ExtResource("3_d32yr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.5, 0)
+
+[node name="Camera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)
+far = 100.0
+script = ExtResource("4_b53ka")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.435561, 0.900159, 0, -0.900159, -0.435561, 0, 0, 0)
+shadow_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15411, 4.96929, 1.25582)
+light_energy = 10.0
+omni_range = 25.315
+
+[node name="User Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_0is81")
+
+[node name="Result_Label" type="RichTextLabel" parent="User Interface"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 160.0
+offset_top = 515.0
+offset_right = 1120.0
+offset_bottom = 718.0
+theme_override_fonts/normal_font = ExtResource("5_ia1ou")
+theme_override_fonts/bold_font = ExtResource("6_nu3lo")
+bbcode_enabled = true
+fit_content = true

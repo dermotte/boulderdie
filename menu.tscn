@@ -1,0 +1,154 @@
+[gd_scene load_steps=14 format=3 uid="uid://dil064watd7ty"]
+
+[ext_resource type="Script" path="res://menu.gd" id="1_6y43q"]
+[ext_resource type="PackedScene" uid="uid://hhpetkchi738" path="res://BoulderDie01.glb" id="2_amacc"]
+[ext_resource type="PackedScene" uid="uid://cb3cv0fnqwjuy" path="res://BoulderDie02.glb" id="3_rushs"]
+[ext_resource type="Script" path="res://BoulderDieAnimation.gd" id="5_asfpm"]
+[ext_resource type="FontFile" uid="uid://bf23krsf6ndhs" path="res://fonts/NotoSans-Regular.ttf" id="5_f8b1y"]
+[ext_resource type="FontFile" uid="uid://drgena3js6o4a" path="res://fonts/NotoSans-Bold.ttf" id="6_hd0fg"]
+[ext_resource type="PackedScene" uid="uid://n83qqp5dn754" path="res://Title.glb" id="7_fic7f"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_chh8g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1sbs"]
+albedo_color = Color(0.129412, 0.329412, 0.0431373, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tsj1o"]
+material = SubResource("StandardMaterial3D_h1sbs")
+size = Vector2(64, 64)
+
+[sub_resource type="Theme" id="Theme_0is81"]
+default_font = ExtResource("5_f8b1y")
+default_font_size = 32
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k54rj"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gbolr"]
+size = Vector3(2, 2, 2)
+
+[node name="MenuRoot" type="Node3D"]
+script = ExtResource("1_6y43q")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_chh8g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/CollisionShape3D"]
+mesh = SubResource("PlaneMesh_tsj1o")
+
+[node name="Wall" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 8, 5, 0)
+shape = SubResource("WorldBoundaryShape3D_chh8g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall/CollisionShape3D"]
+visible = false
+mesh = SubResource("PlaneMesh_tsj1o")
+
+[node name="Wall2" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2"]
+transform = Transform3D(4.37114e-08, 1, -8.74228e-08, 1, -4.37114e-08, 0, -3.82137e-15, -8.74228e-08, -1, -8, 5, 0)
+shape = SubResource("WorldBoundaryShape3D_chh8g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall2/CollisionShape3D"]
+visible = false
+mesh = SubResource("PlaneMesh_tsj1o")
+
+[node name="Wall3" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0, 5, 5)
+shape = SubResource("WorldBoundaryShape3D_chh8g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall3/CollisionShape3D"]
+visible = false
+mesh = SubResource("PlaneMesh_tsj1o")
+
+[node name="Wall4" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall4"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 5, -5)
+shape = SubResource("WorldBoundaryShape3D_chh8g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall4/CollisionShape3D"]
+visible = false
+mesh = SubResource("PlaneMesh_tsj1o")
+
+[node name="Camera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 2.992, 1.635)
+far = 100.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.97868, 0.185399, -0.0883923, 0.108294, 0.831463, 0.544924, 0.174523, 0.523733, -0.833814, 0, 1.52496, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.182405, 1.61814, 1.25582)
+light_energy = 10.0
+shadow_enabled = true
+omni_range = 25.315
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.618, 1.256)
+light_energy = 10.0
+omni_range = 25.315
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.618, 1.256)
+light_energy = 10.0
+omni_range = 25.315
+
+[node name="User Interface" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_0is81")
+
+[node name="Result_Label" type="RichTextLabel" parent="User Interface"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 547.0
+offset_top = 62.0
+offset_right = 710.0
+offset_bottom = 107.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("5_f8b1y")
+theme_override_fonts/bold_font = ExtResource("6_hd0fg")
+bbcode_enabled = true
+text = "Bewegung"
+fit_content = true
+
+[node name="BoulderDie02" parent="." instance=ExtResource("3_rushs")]
+transform = Transform3D(0.447163, 0, 0.223708, 0, 0.5, 0, -0.223708, 0, 0.447163, 1.5, 0, 0)
+script = ExtResource("5_asfpm")
+
+[node name="Area3D" type="Area3D" parent="BoulderDie02"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoulderDie02/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_k54rj")
+
+[node name="BoulderDie01" parent="." instance=ExtResource("2_amacc")]
+transform = Transform3D(0.247964, 0, -0.434182, 0, 0.5, 0, 0.434182, 0, 0.247964, -1.5, 0, 0)
+script = ExtResource("5_asfpm")
+
+[node name="Area3D" type="Area3D" parent="BoulderDie01"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoulderDie01/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_gbolr")
+
+[node name="Title" parent="." instance=ExtResource("7_fic7f")]
+transform = Transform3D(1.212, 0, 0, 0, 1.17445, -0.299363, 0, 0.299363, 1.17445, -2.935, 0.112, 1.554)
+
+[connection signal="input_event" from="BoulderDie02/Area3D" to="." method="_on_die_02_input_event"]
+[connection signal="input_event" from="BoulderDie01/Area3D" to="." method="_on_die_01_input_event"]
